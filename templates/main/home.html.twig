@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Gestion de maintenance</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styleHome.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" href="/images/logo projet.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lato,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+.header{
+    width: 100%;
+    height: 60vh;
+    background-color: #fff;
+    position: relative;
+}
+
+.header .navbar{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    margin-top: 30px;
+}
+
+.logo img{
+    margin-left: 100px;
+    margin-right: 0px;
+}
+
+.menu ul li{
+    display: inline-block;
+    padding: 0 25px;
+    cursor: pointer;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 80px;
+    align-items: center;
+}
+
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-btn{
+    display: block;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 30px;
+    border-color: #2196F3;
+    color: dodgerblue;
+    padding: 8px 40px;
+    margin-right: 100px;
+}
+
+.login-btn:hover {
+    background: #2196F3;
+    color: white;
+}
+
+.banner{
+    width: 80%;
+    height: 70%;
+    position: absolute;
+    top: 25%;
+    left: 150px;
+    color: #fff;
+}
+
+.app-text{
+    width: 50%;
+    float: left;
+    padding-left: 50px;
+    padding-top: 30px;
+}
+
+.app-picture{
+    width: 50%;
+    float: right;
+    padding-right: 60px;
+    padding-top: 80px;
+}
+
+.app-text h3{
+    margin-top: 100px;
+    font-size: 17px;
+    color: #000;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.app-text h1{
+    font-size: 45px;
+    position: relative;
+    color: #000;
+    margin-top: 60px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.app-text p{
+    font-size: 19px;
+    margin: 30px 30px 30px 0;
+    letter-spacing: 1px;
+    color: #000;
+    padding-right: 250px;
+}
+
+.btn-group{
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.btn-group .signup-btn{
+    cursor: pointer;
+    display: block;
+    color: #000;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 32px;
+    background-color: #57E4F2;
+    padding: 15px 50px;
+}
+
+.btn-group .play-btn{
+    margin-left: 40px;
+    display: inline-flex;
+}
+
+.btn-group span{
+    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    margin: auto 20px;
+    cursor: pointer;
+}
+
+.play-btn-inner{
+    height: 50px;
+    width: 50px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.play-btn-inner i{
+    padding: 15px 19px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.about-services{
+    position: absolute;
+    top: 125%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    padding: 0 300px;
+}
+
+.about-services ul{
+    display: inline-flex;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.about-services ul li{
+    margin: 0 50px;
+    cursor: pointer;
+}
+
+.about-services ul li img{
+    width: 120px;
+    height: auto;
+}
+
+.about-services ul li h1{
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.about-services ul li p{
+    font-size: 15px;
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.social-icons{
+    position: fixed;
+    right: 30px;
+    top: 30%;
+}
+
+.social-icons ul li{
+    margin-top: 5px;
+    text-align: center;
+}
+
+.social-icons ul li a{
+    color: #000;
+    padding: 10px;
+    display: block;
+    font-size: 29px;
+}
+
+.social-icons ul li a:hover{
+    background-color: #220efb;
+    color: #fff;
+}
+
+
+    </style>
+</head>
+<body>
+	<div class="header">
+     <div class="navbar">
+         <div class="logo">
+             <a href="#" ><img src="images/Gestion des taches de maintenance.png" style="margin-top:30px;width:350px; height:auto""></a>
+         </div>
+         
+         <a class="btn login-btn" href="{{path('security_login')}}">Se connecter</a>
+     </div>   
+
+     <div class="banner">
+         <div class="app-text">
+             
+             <h1>Gestion des taches de maintenance</h1>
+             <p> Gestionnner vos interventions en cas de pannes des machines 
+                de votre entreprise. Cette application offre plusieurs fonctionnalités</p>
+
+             <div class="btn-group">
+                 <a class="signup-btn" href="{{path('security_login')}}">Commencer</a>
+                 <div class="play-btn">
+                     <div class="play-btn-inner">
+                         <i class="fa fa-play"></i>
+                     </div>
+                     <span>Comment ça marche</span>
+                 </div>
+             </div>
+         </div>
+         <div class="app-picture">
+             <img src="images/logo home.svg" style="width: = 380px ; height: 380px ;">
+         </div>
+     </div>
+
+     
+
+     <div class="social-icons">
+         <ul>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+         </ul>
+     </div>
+    </div>
+</body>
+</html>

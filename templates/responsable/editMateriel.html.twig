@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ResponsableController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-6 col-md-offset-5">
+        <div class="alert alert-dismissible alert-success">
+  
+  <h4 class="alert-heading"> <u>
+  Modifier le matériel
+  
+  </u> </h4>
+</div>
+            {{form_start(formMateriel)}}
+    <div class="form-group">
+        {{form_row(formMateriel.nom, {'label' : 'Titre','attr' : 
+    {'placeholder' : 'Nom du matériel...' , 'class': "form-control"}})}}
+    </div>
+    <div class="form-group">
+        {{form_row(formMateriel.description, {'label' : 'Description','attr' : 
+    {'placeholder' : 'Description...' , 'class': "form-control"}})}}
+    </div>
+       
+    <div class="form-group">
+         {{form_row(formMateriel.image, {'label':"Image du matériel...", 'attr':{ 'placeholder':"Fin de la tache....", 'class': "form-control"}})}}
+    </div>   
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">
+            Valider
+        </button>
+    </div>
+
+    {{form_end(formMateriel)}}
+    {{dump(formMateriel)}}
+    
+        </div>
+    </div>
+{% endblock %}

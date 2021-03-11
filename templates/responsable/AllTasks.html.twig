@@ -1,0 +1,195 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+{% block title %}Hello ResponsableController!{% endblock %}
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <title>project cards - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    	body{margin-top:20px;
+background-color: #f7f7fc;
+}
+.card-subtitle, .card-title {
+    font-weight: 400;
+}
+.card-title {
+    font-size: 20px;
+    color: #495057;
+}
+.card {
+    margin-bottom: 24px;
+    box-shadow: 0 0 0.875rem 0 rgba(33,37,41,.05);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: initial;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.card-header:first-child {
+    border-radius: .25rem .25rem 0 0;
+}
+.card-header {
+    border-bottom-width: 1px;
+}
+.pb-0 {
+    padding-bottom: 0!important;
+}
+.card-header {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #fff;
+    border-bottom: 0 solid transparent;
+}
+    </style>
+{% endblock %}
+{% block body %}
+<br>
+<div class="container p-0">
+
+    <a href="{{path('responsable_task_create')}}" class="btn btn-success float-right mt-n1"><i class="fas fa-plus"></i> Ajouter un ordre</a>
+	<h1 class="h3 mb-3">Ordres de travail :</h1>
+    <div class="row">
+
+        {% for tache in taches %}
+        <div class="col-12 col-md-6 col-lg-12" style="margin-top:50px;">
+			<div class="card">
+
+				<div class="card-header px-4 pt-4">
+					
+					<h5 class="card-title mb-0">{{tache.titre}}</h5>
+					<div 
+                    {% if tache.Etat == "Finie" %}
+                        class="badge bg-success my-2"
+                    {% elseif tache.Etat == "En cours.." %}
+                        class="badge bg-warning my-2"
+                    {% elseif tache.Etat == "Attribuée" %}
+                        class="badge bg-primary my-2"
+                    {% elseif tache.Etat == "Pas encore attribuée" %}
+                        class="badge bg-danger my-2"
+                    {% endif %}
+                    
+                    >{{tache.Etat}}</div>
+				</div>
+				<div class="card-body px-4 pt-0">
+					<p>{{tache.description}}</p>
+				</div>
+
+				
+				<div class="container" style="margin-left: 10px;
+				margin-top: -20px;">
+					<div style="float : left;">
+                        <p class="mb-2 font-weight-bold">Responsable :      </p>
+					    <img src="{{asset('uploads/images/' ~ tache.responsable.image)}}" class="rounded-circle mr-1" alt="Avatar" width="60" height="60">
+                        <small>{{tache.responsable.nom_complet}}</small>
+                    </div>
+                    <div style="float : right; margin-right : 400px;">
+                        <p class="mb-2 font-weight-bold">Technicien :      </p>
+                        {% if tache.technicien is not null  %}
+                            {% for technicien in tache.technicien %}
+                                <img src="{{asset('uploads/images/' ~ technicien.image)}}" class="rounded-circle mr-1" alt="Avatar" width="60" height="60">
+                                <small>{{technicien.nom_complet}} , </small>
+                            {% else %}
+                                <small> Aucun technicien attribué actuellement </small>
+                            {% endfor %}
+                            
+                        {% endif %}
+                       {# {% if tache.technicien is not null  %}
+					    <img src="{{asset('uploads/images/' ~ tache.technicien.image)}}" class="rounded-circle mr-1" alt="Avatar" width="60" height="60">
+                        <small>{{tache.technicien.nom_complet}}</small>
+                        {% else  %}
+                            <small> Aucun technicien attribué actuellement </small>
+                        {% endif %} #}
+                    </div>
+				</div>
+				<br>
+
+				<div class="container" style="margin-left: 10px;margin-top: -18px;">
+					<p class="mb-2 font-weight-bold">Matériels :      </p>
+                      {#  {% set counter = 0 %}
+                        {% for te in t %}
+                            {% if te.tache == tache %}
+                                {% set counter = counter + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if counter == 0 %}
+                            <small>Pas de matériels attribués actuellement</small>
+                        {% endif %}
+
+                        {% for materiel in materiels %}
+                            {% if materiel.tache.id == tache.id %}
+					<img src="{{asset('uploads/images/' ~ materiel.image)}}" class="rounded-circle mr-1" alt="Avatar" width="60" height="60">
+                    <small style="margin-right:20px;">{{materiel.nom}} , </small>
+                            {% endif %}
+                        {% endfor %} #}
+                        {% if tache.materiel is not null  %}
+                            {% for materiel in tache.materiel %}
+                                <img src="{{asset('uploads/images/' ~ materiel.image)}}" class="rounded-circle mr-1" alt="Avatar" width="60" height="60">
+                                <small>{{materiel.nom}} , </small>
+                            {% else %}
+                                <small> Aucun technicien attribué actuellement </small>
+                            {% endfor %}
+                            
+                        {% endif %}
+				</div>
+				<br>
+			<div class="container" style="margin-left: 10px;">Créee le <span style="color: grey;">{{ tache.dateDebut  | date('d/m/Y')}} à {{ tache.dateDebut | date('H:i')}}</span></div>
+
+			<div class="container" style="margin-left: 10px;">Elle doit étre finie avant le <span style="color: red;">{{ tache.dateFin  | date('d/m/Y')}} à {{ tache.dateFin | date('H:i') }}</span>( Durée de cette tache :    
+    {% set duree = tache.dateFin.diff(tache.dateDebut)  %}
+    {% set reste = tache.dateFin.diff( currentDate) %}
+    {{duree.y}} années , {{duree.m}}mois , {{duree.d}} jours et {{duree.h}} heures !! )</div>
+
+			<div class="container" style="margin-left: 10px;">Il vous reste :  <span style="color: red;">{{reste.y}} années , {{reste.m}}mois , {{reste.d}} jours et {{reste.h}} heures !!</span></div>	
+
+				<ul class="card-body px-4 pt-0" style="list-style-type:none; margin-bottom:0px;">
+					<li class="card-body px-0 pt-4">
+						<p class="mb-2 font-weight-bold">Progrès <span class="float-right">{{tache.progress}}%</span></p>
+						<div class="progress progress-sm">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{tache.progress}}%;">
+							</div>
+						</div>
+					</li>
+				</ul>
+
+				<div class="container" style="margin-bottom: 20px; ">
+					<div style="float: right;">
+						<a href="{{path('responsable_gantt_respo')}}" class="btn btn-primary"> Afficher dans GANTT</a>
+                        <a href="{{ path('responsable_solliciter_materiel',{'id' : tache.id}) }}" class="btn btn-success"> Solliciter des matériels</a>
+                    <a href="{{ path('responsable_AssignerTech_edit',{'id' : tache.id}) }}" class="btn btn-info"> Affecter des techniciens</a>
+                    <a href="{{ path('responsable_tache_edit',{'id' : tache.id}) }}" class="btn btn-warning"> Modifier</a>
+					<a href="{{path('responsable_task_delete' , {'id' : tache.id}) }}" class="btn btn-danger"> Supprimer</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+        <br>
+        <br>
+        {% else %}
+            <p>Aucun ordre de travail n'est attribué actuellement</p>
+        {% endfor %}
+    </div>
+</div>
+{#{{dump(taches)}}
+{% for m in t %}
+    {{m.nom}} , 
+    {% if m.estDisponible() == true %}
+        dispo |
+    {% elseif m.estDisponible() == false %}
+        non dispo |
+    {% endif %}
+{% endfor %}
+#}
+{% endblock %}

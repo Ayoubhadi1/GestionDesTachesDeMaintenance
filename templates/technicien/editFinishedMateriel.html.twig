@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ResponsableController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-md-8 col-md-offset-5">
+        <div class="alert alert-dismissible alert-success">
+  
+  <h4 class="alert-heading"> <u>
+  Vous avez fini de l'un des materiels ?
+  </u> </h4>
+  </div>
+  <label for="">Les matériels : ({{tache.titre}}) </label>
+    
+    <table class="table table-hover">
+        <thead>
+        <tr class="table-active">
+            <th>Image</th>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Disponible (oui/non)</th>
+            
+            <th style="width : 130px ;">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            
+            {% for materiel in materiels %}
+                <tr>
+                    <td><img style="
+	width: 60px;
+	height: 60px;
+	" src="{{asset('uploads/images/' ~ materiel.image)}}" class="avatar" alt="Avatar">
+        </td>
+                    <td>{{ materiel.id }}</td>
+                    <td>{{ materiel.nom }}</td>
+                    <td>{{ materiel.description }}</td>
+                    <td>{% if materiel.estDisponible() == true %}
+                        oui
+                        {% else %}
+                         non
+                    {% endif %}
+                    </td>
+                    
+                   
+                    <td>
+                        
+                        <a href="{{path('technicien_materiel_vider',{'id' : materiel.id , 'idtch' : tache.id })}}" class="btn btn-danger btn-sm">J'ai fini</a>
+                    </td>
+                </tr>
+                
+            {% else %}
+            <p>
+                <b>( Aucun matériel enregistré )</b>
+            </p>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+    </div>
+{% endblock %}

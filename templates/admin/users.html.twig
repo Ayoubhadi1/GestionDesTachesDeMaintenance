@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+<br>
+    <h1>Liste des utilisateurs</h1>
+    <a href="{{path('admin_add_user')}}" class="btn btn-success" style="float: right; margin-right:50px;">
+         Ajouter un utilisateur
+    </a>
+    <table class="table table-hover">
+        <thead>
+        <tr class="table-active">
+            <th>Image</th>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nom complet</th>
+            <th>Telephone</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {# On boucle sur les utilisateurs #}
+            {% for user in users %}
+                <tr>
+                    <td><img style="
+	width: 45px;
+	height: 45px;
+	" src="{{asset('uploads/images/' ~ user.image)}}" class="avatar" alt="Avatar">
+        </td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.nom_complet }}</td>
+                    <td>{{ user.telephone }}</td>
+                    <td>
+                        {# On boucle sur les rôles #}
+                        
+                            {% if user.roles == ["ROLE_ADMIN"] %}
+                                Administrateur
+                            {% elseif user.roles == ["ROLE_RESPO"] %}
+                                Responsable de maintenance
+                            {% elseif user.roles == ["ROLE_TECH"] %}
+                                Technicien
+                            {% endif %}
+                        
+                    </td>
+                   
+                    <td>
+                        <a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                        {% if app.user.id != user.id %}
+                        <a href="{{ path('admin_supprimer_utilisateur', {'id': user.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                
+            {% else %}
+                <p>Aucun utilisateur inscrit</p>
+            {% endfor %}
+        </tbody>
+    </table>
+    {#{{dump(users)}} #}
+
+{% endblock %}

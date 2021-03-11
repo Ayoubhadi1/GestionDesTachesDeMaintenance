@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ResponsableController!{% endblock %}
+
+{% block body %}
+<style>
+    .card {
+    overflow:hidden;
+}
+
+.card-body .rotate {
+    z-index: 8;
+    float: right;
+    height: 100%;
+}
+
+.card-body .rotate i {
+    color: rgba(20, 20, 20, 0.15);
+    position: absolute;
+    left: 0;
+    left: auto;
+    right: -10px;
+    bottom: 0;
+    display: block;
+    -webkit-transform: rotate(-44deg);
+    -moz-transform: rotate(-44deg);
+    -o-transform: rotate(-44deg);
+    -ms-transform: rotate(-44deg);
+    transform: rotate(-44deg);
+}
+</style>
+
+
+
+<div class="container">
+<br>
+    <div class="placeholder text-center">
+                    <img style="
+	width: 100px;
+	height: 100px;
+    border-radius: 50%;
+    margin-top:20px;
+    border:solid;
+	" src="{{asset('uploads/images/' ~ app.user.image)}}" class="mx-auto img-fluid rounded-circle" alt="Avatar">
+                    <h4>{{app.user.nom_complet}}</h4>
+                    
+                </div>
+<h3 class="display-5 d-none d-sm-block">
+           Statistiques :
+            </h3>
+<div class="row mb-3">
+                <div class="col-xl-3 col-sm-6 py-2">
+                    <div class="card text-white bg-danger h-100">
+                        <div class="card-body bg-danger">
+                            <div class="rotate">
+                                <i class="fa fa-list fa-4x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Ordres de travail non attribués</h6>
+                            <h1 class="display-4">{{nbtacheNonAttribue}}</h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-sm-6 py-2">
+                    <div class="card text-white bg-info h-100">
+                        <div class="card-body bg-info">
+                            <div class="rotate">
+                                 <i class="fa fa-list fa-4x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Ordres de travail non entamé </h6>
+                            <h1 class="display-4">{{nbtacheAttribue}}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6 py-2">
+                    <div class="card text-white bg-warning h-100">
+                        <div class="card-body">
+                            <div class="rotate">
+                                 <i class="fa fa-list fa-4x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Ordres de travail en cours</h6>
+                            <h1 class="display-4">{{nbtacheEnCours}}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-sm-6 py-2">
+                    <div class="card bg-success text-white h-100">
+                        <div class="card-body bg-success">
+                            <div class="rotate">
+                                <i class="fa fa-list fa-4x"></i>
+                            </div>
+                            <h6 class="text-uppercase">Ordres de travail terminés</h6>
+                            <h1 class="display-4">{{nbtacheFinie}}</h1>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+    </div>
+{% endblock %}

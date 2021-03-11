@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matériels{% endblock %}
+
+{% block body %}
+<br>
+    <h1>Liste des matériels</h1>
+    <a href="{{path('responsable_materiel_create')}}" class="btn btn-success" style="float: right; margin-right:50px;">
+         Ajouter un matériel
+    </a>
+   <table class="table table-hover">
+        <thead>
+        <tr class="table-active">
+            <th>Image</th>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Disponible (oui/non)</th>
+            <th>Affecté à l'ordre de travail </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {# On boucle sur les materiels #}
+            {% for materiel in materiels %}
+                <tr>
+                    <td><img style="
+	width: 45px;
+	height: 45px;
+	" src="{{asset('uploads/images/' ~ materiel.image)}}" class="avatar" alt="Avatar">
+        </td>
+                    <td>{{ materiel.id }}</td>
+                    <td>{{ materiel.nom }}</td>
+                    <td>{{ materiel.description }}</td>
+                    <td>{% if materiel.estDisponible() == true %}
+                        oui
+                        {% else %}
+                         non
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if materiel.taches is not null %}
+                        {% for tache in materiel.taches %}
+                           + {{ tache.titre}} <br>
+                        {% else %}
+                            -
+                        {% endfor %}
+                    
+                    {% endif %}
+                    </td>
+                   
+                    <td>
+                       {# <a href="{{path('responsable_AssignerMateriel_edit',{'id' : materiel.id})}}" 
+                        {% if materiel.disponible == false %}
+                        style="pointer-events: none;        
+                        text-decoration: none;
+                        cursor: default;"
+                        class="btn btn-dark btn-sm"
+                        >Dèjà attribué</a>
+                        {% else %}
+                        class="btn btn-primary btn-sm"
+                        >Attribuer à un ordre de travail</a>
+                        {% endif %} #}
+                        <a href="{{path('responsable_Materiel_edit',{'id' : materiel.id})}}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="{{path('responsable_materiel_delete',{'id' : materiel.id})}}" class="btn btn-danger btn-sm">Supprimer</a>
+                    </td>
+                </tr>
+                
+            {% else %}
+                <p>Aucun matériel enregistré</p>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

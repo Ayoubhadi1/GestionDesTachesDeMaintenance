@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un utilisateur{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">{% endblock %}
+{% block body %}
+    
+    <br>
+    <div class="container">
+        <div class="col-md-6 col-md-offset-5">
+  
+  <h1> Ajouter un utilisateur </h1>
+
+            {{form_start(form)}}
+    <div class="form-group">
+        {{form_row(form.nomComplet, {'label' : 'Nom complet','attr' : 
+    {'placeholder' : 'Nom d\'utilisateur...' , 'class': "form-control"}})}}
+    </div>
+    <div class="form-group">
+        {{form_row(form.email, {'label' : 'Adresse email','attr' : 
+    {'placeholder' : 'Adresse email...' , 'class': "form-control"}})}}
+    </div>
+       
+    <div class="form-group">
+         {{form_row(form.telephone, {'label' : 'Numéro de téléphone','attr' : 
+    {'placeholder' : 'Numéro de téléphone...', 'class': "form-control"}})}}
+    </div>
+
+    
+    <div class="form-group">
+        {{form_row(form.password, {'label' : 'Mot de passe','attr' : 
+    {'placeholder' : 'Mot de passe !', 'class': "form-control"}})}}
+    </div>
+    <div class="form-group">
+        {{form_row(form.confirm_password, {'label' : 'Confirmation du mot de passe','attr' : 
+    {'placeholder' : 'Répétez votre mot de passe', 'class': "form-control"}})}}
+    </div>
+    <div class="form-group">
+        {{form_row(form.image, {'label':"Photo de profil", 'attr':{'placeholder' : 'Choisir votre photo de profil', 
+        'class': "form-control"	}})}}
+    
+    </div>
+
+    <div class="form-group">
+        {{form_row(form.roles, {'label':"Roles :", 'attr':{ 'placeholder':"Roles....", 'class': "form-control"}})}}
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">Ajouter</button>
+    </div>
+
+    {{form_end(form)}}
+    
+        </div>
+    </div>
+    
+{% endblock %}
